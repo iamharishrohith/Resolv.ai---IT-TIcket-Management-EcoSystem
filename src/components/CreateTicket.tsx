@@ -10,6 +10,7 @@ import { Textarea } from './ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Sparkles, Upload, X, Image, Video } from 'lucide-react';
 import { TICKET_CATEGORIES } from './TicketOverview';
+import { TicketClassification } from './TicketClassification';
 
 interface CreateTicketProps {
   onLogout: () => void;
@@ -158,6 +159,22 @@ export function CreateTicket({ onLogout }: CreateTicketProps) {
                   required
                 />
               </div>
+
+              {/* AI Classification */}
+              {formData.description.length > 10 && (
+                <TicketClassification 
+                  ticketContent={`${formData.title} ${formData.description}`}
+                  onClassificationComplete={(result) => {
+                    // Auto-populate category and priority based on AI classification
+                    if (result.category && !formData.category) {
+                      setFormData(prev => ({ ...prev, category: result.category.toLowerCase().replace(/ /g, '_') }));
+                    }
+                    if (result.priority && formData.priority === 'medium') {
+                      setFormData(prev => ({ ...prev, priority: result.priority.toLowerCase() }));
+                    }
+                  }}
+                />
+              )}
 
               {/* AI Suggestion */}
               {(aiSuggestion || isAnalyzing) && (

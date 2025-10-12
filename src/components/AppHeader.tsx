@@ -17,7 +17,8 @@ import {
   Plus,
   Database,
   Network,
-  ArrowLeft
+  ArrowLeft,
+  BookOpen
 } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 
@@ -120,20 +121,38 @@ export function AppHeader({
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => navigate('/admin/hierarchy')}
+                onClick={() => navigate('/notifications')}
                 className="hover:bg-accent/50 border-border/50"
               >
-                <GitBranch className="w-4 h-4 mr-2" />
-                Hierarchy
+                <Bell className="w-4 h-4 mr-2" />
+                Notifications
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => navigate('/tickets')}
+                onClick={() => navigate('/connectors')}
+                className="hover:bg-accent/50 border-border/50"
+              >
+                <Database className="w-4 h-4 mr-2" />
+                Connectors
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/sap-solution-manager')}
+                className="hover:bg-accent/50 border-border/50"
+              >
+                <Database className="w-4 h-4 mr-2" />
+                SAP
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/analytics')}
                 className="hover:bg-accent/50 border-border/50"
               >
                 <BarChart3 className="w-4 h-4 mr-2" />
-                Tickets
+                Analytics
               </Button>
             </div>
           )}
@@ -141,6 +160,15 @@ export function AppHeader({
           {/* Quick Actions for Employees */}
           {!user?.isAdmin && (
             <div className="flex items-center space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/knowledge-base')}
+                className="hover:bg-accent/50 border-border/50"
+              >
+                <BookOpen className="w-4 h-4 mr-2" />
+                Knowledge Base
+              </Button>
               <Button
                 variant="outline"
                 size="sm"
